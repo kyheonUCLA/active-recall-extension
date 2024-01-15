@@ -7,6 +7,7 @@ import '../assets/tailwind.css'
 
 function init() {
 	const appContainer = document.createElement('div')
+	appContainer.classList.add('invisible');
 	document.body.appendChild(appContainer)
 	if (!appContainer) {
 		throw new Error("Can not find AppContainer");
