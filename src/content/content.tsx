@@ -1,14 +1,15 @@
 import React, { FC, useState, useEffect } from "react";
 import Widget from "../components/Widget";
+import { useActiveTabContext } from "../context/ActiveTabContextProvider";
 
-type Highlighted = {
+type TabInfo = {
   text: string | null, 
   context: string | null,
 }
 
 const Content: FC = () => {
-  const [highlighted, setHighlighted] = useState<Highlighted | null>(null)
-
+  const { data, setData } = useActiveTabContext();
+  
   useEffect( () => {
     const getSelectionData = () => {
       const selection = window.getSelection();
@@ -20,13 +21,11 @@ const Content: FC = () => {
           context: parentNode.textContent,
         }
       } else {
-        return null
+        return { text: "", context: ""};
       }
     }
-    const handleMouseup = () => {
-      setHighlighted(getSelectionData());
-    }
-    document.addEventListener('mouseup', handleMouseup);
+    
+    document.addEventListener('mouseup', () => setData(getSelectionData()));
   }, [])
 
 
@@ -35,7 +34,7 @@ const Content: FC = () => {
     <>
       <Widget />
       <div className="visible">
-        {highlighted !== null ? <div><h1 className="text-lg font-bold">{highlighted.text}</h1><p className="italic">{highlighted.context}</p></div> : <></>}
+        {data !== null ? <div><h1 className="text-lg font-bold">{data.text}</h1><p className="italic">{data.context}</p></div> : <></>}
       </div>
     </>
   )

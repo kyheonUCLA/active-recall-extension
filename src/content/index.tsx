@@ -1,8 +1,8 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import ActiveTabContextProvider from "../context/ActiveTabContextProvider";
 import Content from "./content";
 import '../assets/tailwind.css'
-
 
 
 function init() {
@@ -15,7 +15,9 @@ function init() {
 	const root = createRoot(appContainer)
 	console.log(appContainer)
 	root.render(
-		<Content />
+		<ActiveTabContextProvider>
+			<Content />
+		</ActiveTabContextProvider>
 	);
 }
 
