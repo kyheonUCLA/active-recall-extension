@@ -1,11 +1,12 @@
 import React, { FC, useState, useEffect } from "react";
 import { BsSun, BsMoon } from "react-icons/bs"
-import { getCompletion } from "../assets/api";
-
+import { getCompletion } from "../../assets/api";
+import { useActiveTabContext } from "../../context/ActiveTabContextProvider";
 
 const Widget: FC = () => {
+  const { data } = useActiveTabContext();
   const prompt = "name one animal";
-
+  
   return (
     <button
       className="visible fixed bottom-5 right-5 bg-gray-400 w-[3rem] h-[3rem] 

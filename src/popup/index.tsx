@@ -13,9 +13,11 @@ function init() {
 	const root = createRoot(appContainer)
 	console.log(appContainer)
 	root.render(
-		<PopupContextProvider>
-			<Popup />
-		</PopupContextProvider>
+		<React.StrictMode>
+			<PopupContextProvider>
+				<Popup />
+			</PopupContextProvider>
+		</React.StrictMode>
 	);
 }
 

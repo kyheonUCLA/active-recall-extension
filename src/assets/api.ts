@@ -2,7 +2,6 @@ import OpenAI from "openai";
 
 const getCompletion = async (prompt: string) => {
   const API_URL = "http://localhost:5050/api/openai";
-  
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
@@ -25,5 +24,26 @@ const getCompletion = async (prompt: string) => {
   }
 };
 
+const sendSMS = async (phone: string, message: string) => {
+  const API_URL = 'http://localhost:5050/api/twilio';
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ phone, message }),
+    });
+    if (!response.ok) {
+      throw new Error('Error with sendSMS request');
+    }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-export { getCompletion }
+
+
+export { getCompletion, sendSMS }

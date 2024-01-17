@@ -1,9 +1,11 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
+
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const tailwindcss = require('tailwindcss')
 const autoprefixer = require('autoprefixer')
+
 
 module.exports = {
   entry: {
@@ -14,19 +16,24 @@ module.exports = {
   module: {
     rules: [
       {
-          use: 'ts-loader',
-          test: /\.tsx?$/,
-          exclude: /node_modules/,
+        use: 'ts-loader',
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/i,
         use: [
-          'style-loader',
           {
-              loader: 'css-loader',
-              options: {
-                  importLoaders: 1,
-              },
+            loader: 'style-loader',
+            options: {
+              
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
           },
           {
             loader: 'postcss-loader', // postcss loader needed for tailwindcss
@@ -45,7 +52,7 @@ module.exports = {
       },
     ]
   },
-"plugins": [
+  plugins: [
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false
     }),
@@ -72,10 +79,15 @@ module.exports = {
       chunks(chunk) {
         return chunk.name !== 'content';
       },
-    
+      
     }
   }
 }
+
+// function insertIntoTarget(element, options) {
+//   var parent = options.target || document.head;
+//   parent.appendChild(element);
+// }
 
 function getHtmlPlugins(chunks) {
   return chunks.map(chunk => new HtmlPlugin({

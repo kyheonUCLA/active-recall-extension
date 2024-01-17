@@ -1,8 +1,8 @@
 import React from "react";
-import Input from "../components/Input";
-import TextArea from "../components/TextArea";
+import Input from "./components/Input";
+import TextArea from "./components/TextArea";
 import './popup.css'
-import TitleBar from "../components/TitleBar";
+import TitleBar from "./components/TitleBar";
 
 const Popup = () => {
 	return (

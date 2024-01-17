@@ -7,17 +7,25 @@ import '../assets/tailwind.css'
 
 function init() {
 	const appContainer = document.createElement('div')
-	appContainer.classList.add('invisible');
-	document.body.appendChild(appContainer)
+	appContainer.id = "shadow-root";
+	//appContainer.classList.add('invisible');
 	if (!appContainer) {
 		throw new Error("Can not find AppContainer");
 	}
+
+	//const shadowRoot = appContainer.attachShadow({ mode: 'open' });
+  //const root = createRoot(shadowRoot);
+
 	const root = createRoot(appContainer)
-	console.log(appContainer)
+
+
+	document.body.appendChild(appContainer);
 	root.render(
-		<ActiveTabContextProvider>
-			<Content />
-		</ActiveTabContextProvider>
+		<React.StrictMode>
+			<ActiveTabContextProvider>
+				<Content />
+			</ActiveTabContextProvider>
+		</React.StrictMode>
 	);
 }
 
