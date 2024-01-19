@@ -1,23 +1,18 @@
 import React, { FC, createContext, useContext, useState } from "react";
-
-type TabInfo = {
-  text: string,
-  context: string,
-}
-
-type ActiveTabContextProviderProps = {
-  children: React.ReactNode,
-}
+import type { DataType } from "../assets/types";
 
 type ContextType = {
-  data: TabInfo,
-  setData: React.Dispatch<React.SetStateAction<TabInfo>>,
+  data: DataType,
+  setData: React.Dispatch<React.SetStateAction<DataType>>,
 }
 
 const Context = createContext<ContextType | null>(null);
 
+type ActiveTabContextProviderProps = {
+  children: React.ReactNode,
+}
 const ActiveTabContextProvider: FC<ActiveTabContextProviderProps> = ({ children }) => {
-  const [data, setData] = useState<TabInfo>({text: "", context: ""});
+  const [data, setData] = useState<DataType>({text: "", context: "", url: ""});
 
   return (
     <Context.Provider value={

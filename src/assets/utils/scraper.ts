@@ -11,16 +11,8 @@ const getSelectedContext = () : string => {
   return context && context.length > 0 ? context : "";
 }
 
-const getCurrentTab = () : chrome.tabs.Tab | null => { 
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    if (tabs && tabs.length > 0) {
-      const currentTab = tabs[0];
-      return currentTab;
-    }
-  })
-  return null;
+const getCurrentURL = () : string => { 
+  return document.URL
 }
 
-
-
-export { getSelectedText, getSelectedContext, getCurrentTab }
+export { getSelectedText, getSelectedContext, getCurrentURL }

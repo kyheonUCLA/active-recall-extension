@@ -3,35 +3,24 @@ import Widget from "./components/Widget";
 import TestConsole from "./components/TestBox";
 
 import { useActiveTabContext } from "../context/ActiveTabContextProvider";
-import { getSelectedText, getSelectedContext } from "../assets/utils/scraper";
-
-type TabInfo = {
-  text: string | null, 
-  context: string | null,
-}
+import { getSelectedText, getSelectedContext, getCurrentURL } from "../assets/utils/scraper";
 
 const Content: FC = () => {
   const { data, setData } = useActiveTabContext();
-  const newData = {
-    text: getSelectedText(),
-    context: getSelectedContext()
-  }
 
   useEffect( () => {  
     document.addEventListener('mouseup', () => setData({
       text: getSelectedText(),
-      context: getSelectedContext()
+      context: getSelectedContext(),
+      url: getCurrentURL(),
     }));
   }, [setData])
-
 
 
   return (
     <>
       <TestConsole>
-        
-        {data !== null ? <p className=" px-1 text-sm font-bold">{data.text}</p> : null}
-        
+        {data !== null ? <p className=" px-1 text-sm font-bold overflow-hidden">{data.text}</p> : null}
       </TestConsole>
       <Widget />
     </>

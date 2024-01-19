@@ -17,7 +17,7 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://*.google.com/*", "https://*/*", "http://*/*"],
+      "matches": ["https://*.wikipedia.org/*", "https://*.example.com/*"],
       "js": ["content.js"]
     }
   ]
