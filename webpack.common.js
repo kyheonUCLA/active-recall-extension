@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 
@@ -80,7 +79,6 @@ module.exports = {
       chunks(chunk) {
         return chunk.name !== 'content';
       },
-      
     }
   }
 }
@@ -95,15 +93,20 @@ function getHtmlPlugins(chunks) {
 
 
 function insertInShadow(styles) {
-  if (window.location.pathname === '/') {
-    const appContainer = document.createElement('div');
-    appContainer.id = 'active-recall-shadow-root';
-    appContainer.style.visibility = 'hidden';
-    const shadowRoot = appContainer.attachShadow({ mode: 'open' });
-    shadowRoot.appendChild(styles);
-    document.body.appendChild(appContainer);
-    // window._shadowRoot = shadowRoot; // Store the shadow root in a global variable
-  } else {
-    document.head.appendChild(styles)
+
+  switch (window.location.pathname) {
+    case '/popup.html':
+      document.head.appendChild(styles)
+    break;
+    default: 
+      const appContainer = document.createElement('div');
+      appContainer.id = 'active-recall-shadow-root';
+      appContainer.style.visibility = 'hidden';
+      const shadowRoot = appContainer.attachShadow({ mode: 'open' });
+      shadowRoot.appendChild(styles);
+      document.body.appendChild(appContainer);
+    break;
   }
+  
+  console.log(window.location.pathname)
 }
