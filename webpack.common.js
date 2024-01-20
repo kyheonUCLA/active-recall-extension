@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 
@@ -26,7 +27,7 @@ module.exports = {
           {
             loader: 'style-loader',
             options: {
-              
+              insert: insertInShadow,
             }
           },
           {
@@ -84,15 +85,25 @@ module.exports = {
   }
 }
 
-// function insertIntoTarget(element, options) {
-//   var parent = options.target || document.head;
-//   parent.appendChild(element);
-// }
-
 function getHtmlPlugins(chunks) {
   return chunks.map(chunk => new HtmlPlugin({
     title: 'React Extension',
     filename: `${chunk}.html`,
     chunks: [chunk]
   }))
+}
+
+
+function insertInShadow(styles) {
+  if (window.location.pathname === '/') {
+    const appContainer = document.createElement('div');
+    appContainer.id = 'active-recall-shadow-root';
+    appContainer.style.visibility = 'hidden';
+    const shadowRoot = appContainer.attachShadow({ mode: 'open' });
+    shadowRoot.appendChild(styles);
+    document.body.appendChild(appContainer);
+    // window._shadowRoot = shadowRoot; // Store the shadow root in a global variable
+  } else {
+    document.head.appendChild(styles)
+  }
 }

@@ -6,7 +6,7 @@ type TestConsoleProps = {
 
 const TestConsole: FC<TestConsoleProps> = ({ children }) => {
   return (
-    <div className="visible flex items-center fixed bottom-1 left-5 h-36 w-96 bg-purple-300">
+    <div className="flex items-center fixed bottom-1 left-5 h-36 w-96 bg-purple-300">
       {children}
     </div>
   )

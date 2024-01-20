@@ -18,12 +18,12 @@ const Content: FC = () => {
 
 
   return (
-    <>
+    <div className="visible">
       <TestConsole>
         {data !== null ? <p className=" px-1 text-sm font-bold overflow-hidden">{data.text}</p> : null}
       </TestConsole>
       <Widget />
-    </>
+    </div>
   )
 }
 
