@@ -44,6 +44,32 @@ const sendSMS = async (phone: string, message: string) => {
   }
 };
 
+const saveInput = async (input: string) => {
+  try{
+    const API_URL = "http://localhost:5050/api/openai";
+    const prompt = "Create a multiple choice question based on the following info: " + input
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ prompt }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    console.log(data.choices[0].message.content);
+
+  } catch(error){
+    console.error('There was an error:', error);
+    throw error; // Rethrow the error if needed
+  }
+
+}
 
 
-export { getCompletion, sendSMS }
+
+export { getCompletion, sendSMS, saveInput }
