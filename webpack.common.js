@@ -26,7 +26,7 @@ module.exports = {
           {
             loader: 'style-loader',
             options: {
-              
+              insert: insertInShadow,
             }
           },
           {
@@ -79,15 +79,9 @@ module.exports = {
       chunks(chunk) {
         return chunk.name !== 'content';
       },
-      
     }
   }
 }
-
-// function insertIntoTarget(element, options) {
-//   var parent = options.target || document.head;
-//   parent.appendChild(element);
-// }
 
 function getHtmlPlugins(chunks) {
   return chunks.map(chunk => new HtmlPlugin({
@@ -95,4 +89,24 @@ function getHtmlPlugins(chunks) {
     filename: `${chunk}.html`,
     chunks: [chunk]
   }))
+}
+
+
+function insertInShadow(styles) {
+
+  switch (window.location.pathname) {
+    case '/popup.html':
+      document.head.appendChild(styles)
+    break;
+    default: 
+      const appContainer = document.createElement('div');
+      appContainer.id = 'active-recall-shadow-root';
+      appContainer.style.visibility = 'hidden';
+      const shadowRoot = appContainer.attachShadow({ mode: 'open' });
+      shadowRoot.appendChild(styles);
+      document.body.appendChild(appContainer);
+    break;
+  }
+  
+  console.log(window.location.pathname)
 }

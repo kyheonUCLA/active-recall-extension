@@ -1,23 +1,24 @@
-import { MessageType } from "../assets/types";
+import { getCompletion } from "../assets/api";
+import type { MessageType } from "../assets/types";
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log("I just got installed");
 })
 
-// every message guaranteed to have 'type' field
-chrome.runtime.onMessage.addListener((message: MessageType) => {
-  console.log("received a message");
-  console.log(message);
-  
-  // based on the type route the message to the correct place
+// every message has 'type' field
+chrome.runtime.onMessage.addListener((message: MessageType, sender, sendResponse) => {
   switch (message.type) {
     case 'CONTENT_DATA_RESPONSE': 
-      chrome.runtime.sendMessage(message);
+      getCompletion("name an animal").then( (response) => {
+        sendResponse(response)
+      })
       break;
     default:
       console.log('message type not yet detected')
       break;
   }
+  return true;
 });
+
 
 

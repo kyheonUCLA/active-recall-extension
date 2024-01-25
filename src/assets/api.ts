@@ -16,7 +16,6 @@ const getCompletion = async (prompt: string) => {
     }
 
     const data = await response.json();
-    console.log(data.choices[0].message.content);
     return data; // You can return the data if needed
   } catch (error) {
     console.error('There was an error:', error);
