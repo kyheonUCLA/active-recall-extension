@@ -10,6 +10,7 @@ const TextArea: FC = () => {
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setInputText(event.target.value);
+    console.log("text added!");
   };
 
   return (
@@ -56,6 +57,7 @@ const SaveButton: FC<SaveButtonProps> = ({ inputText, setInputText }) => {
   );
 };
 
+// Does nothing right now
 const CopyButton: FC = () => {
   return (
     <button

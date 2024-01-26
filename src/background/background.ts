@@ -1,4 +1,4 @@
-import { getCompletion } from "../assets/api";
+import { saveInput } from "../assets/api";
 import type { MessageType } from "../assets/types";
 
 chrome.runtime.onInstalled.addListener(() => {
@@ -9,7 +9,7 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.runtime.onMessage.addListener((message: MessageType, sender, sendResponse) => {
   switch (message.type) {
     case 'CONTENT_DATA_RESPONSE': 
-      getCompletion("name an animal").then( (response) => {
+      saveInput("name an animal").then( (response) => {
         sendResponse(response)
       })
       break;
