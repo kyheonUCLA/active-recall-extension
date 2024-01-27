@@ -15,4 +15,4 @@ const getCurrentURL = () : string => {
   return document.URL
 }
 
-export { getSelectedText, getSelectedContext, getCurrentURL }
+export default { getSelectedText, getSelectedContext, getCurrentURL }

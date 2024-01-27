@@ -1,25 +1,31 @@
 
-const messageTypes = [
-  "CONTENT_DATA_RESPONSE",
-  "CONTENT_DATA_REQUEST",
+const responseMessageTypes = [
+  "SEND_TAB_DATA_RESPONSE",
+  "SEND_POPUP_DATA_RESPONSE",
 ] as const
 
-type MessageHeader = {
-  type: typeof messageTypes[number],
-} 
+const requestMessageTypes = [
+  "SEND_TAB_DATA_REQUEST",
+  "SEND_POPUP_DATA_REQUEST",
+] as const
 
-// Later I will replace any with expected datatypes, like TabInfoType, ChatGPTType, etc
-type MessageBody = {
-  body?: any,
+type RequestMessageType = {
+  type: typeof requestMessageTypes[number],
+  body: any,
 }
 
-type MessageType = MessageHeader & MessageBody;
+type ResponseMessageType = {
+  type: typeof responseMessageTypes[number],
+  success: boolean,
+  data?: any, //maybe data is required depends on what data the server sends back
+}
 
-type DataType = {
+type TabDataType = {
   text: string,
   context: string,
   url: string,
 }
 
-export { DataType, MessageType }
+export { RequestMessageType, ResponseMessageType }
+export { TabDataType }
 

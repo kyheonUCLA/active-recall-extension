@@ -2,17 +2,22 @@ import React, { FC, useState, useEffect } from "react";
 import { BsSun, BsMoon } from "react-icons/bs"
 import { getCompletion } from "../../assets/api";
 import { useActiveTabContext } from "../../context/ActiveTabContextProvider";
-import type { MessageType } from "../../assets/types";
+import type { RequestMessageType, ResponseMessageType } from "../../assets/types";
 
 const Widget: FC = () => {
-  const { data } = useActiveTabContext();
+  const { tabData } = useActiveTabContext();
 
-  const foo = () => {
+  const handleClick = () => {
     chrome.runtime.sendMessage({ 
-      type: "CONTENT_DATA_RESPONSE", 
-      data: data 
-    } as MessageType, (response) => {
-      console.log(response.choices[0].message);
+      type: "SEND_TAB_DATA_REQUEST",  // requesting to send tabData to the server
+      body: tabData 
+    } as RequestMessageType, (messageRes: ResponseMessageType) => {
+      if (messageRes.success) {
+				console.log("TAB_DATA successfully sent to server")
+        console.log(messageRes.data?.choices[0].message.content);
+			} else {
+				console.log("TAB_DATA not recieved")
+			}
     });
   };
    
@@ -22,7 +27,7 @@ const Widget: FC = () => {
       className="fixed bottom-5 right-5 bg-gray-400 w-[3rem] h-[3rem] 
       bg-opacity-80 backdrop-blur-[0.5rem] border border-black border-opacity-40 
       shadow-2xl rounded-full flex items-center justify-center hover:scale-[1.15] 
-      active:scale-105 transition-all dark:bg-gray-950" onClick={foo}>
+      active:scale-105 transition-all dark:bg-gray-950" onClick={handleClick}>
       <BsMoon />
     </button>
   )

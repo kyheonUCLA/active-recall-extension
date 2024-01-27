@@ -1,31 +1,31 @@
 import React, { FC, createContext, useContext, useState } from "react";
-import type { DataType } from "../assets/types";
+import type { TabDataType } from "../assets/types";
 
-type ContextType = {
-  data: DataType,
-  setData: React.Dispatch<React.SetStateAction<DataType>>,
+type ActiveTabContextProviderType = {
+  tabData: TabDataType,
+  setTabData: React.Dispatch<React.SetStateAction<TabDataType>>,
 }
 
-const Context = createContext<ContextType | null>(null);
+const ActiveTabContext = createContext<ActiveTabContextProviderType | null>(null);
 
 type ActiveTabContextProviderProps = {
   children: React.ReactNode,
 }
 const ActiveTabContextProvider: FC<ActiveTabContextProviderProps> = ({ children }) => {
-  const [data, setData] = useState<DataType>({text: "", context: "", url: ""});
+  const [tabData, setTabData] = useState<TabDataType>({text: "", context: "", url: ""});
 
   return (
-    <Context.Provider value={
+    <ActiveTabContext.Provider value={
       {
-        data, setData
+        tabData, setTabData
       }}>
       {children}
-    </Context.Provider>
+    </ActiveTabContext.Provider>
   )
 }
 
 const useActiveTabContext = () => {
-  const context = useContext(Context);
+  const context = useContext(ActiveTabContext);
 
   if (context === null) {
     throw new Error("must be used within PopupContextProvider block")

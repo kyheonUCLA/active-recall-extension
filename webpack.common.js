@@ -93,7 +93,6 @@ function getHtmlPlugins(chunks) {
 
 
 function insertInShadow(styles) {
-
   switch (window.location.pathname) {
     case '/popup.html':
       document.head.appendChild(styles)
