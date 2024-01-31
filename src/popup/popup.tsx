@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 import './popup.css'
 
-import Input from "./components/Input";
-import TextArea from "./components/TextArea";
-import TitleBar from "./components/TitleBar";
+// import Input from "./components/Input";
+// import TextArea from "./components/TextArea";
+// import TitleBar from "./components/TitleBar";
 
 
 import type { RequestMessageType, ResponseMessageType } from "../assets/types";
@@ -25,10 +28,13 @@ const Popup = () => {
   };
 
 	return (
-		<main className="">
-			<TitleBar />
-			<Input />
-			<TextArea />
+		<main>
+			<Router>
+				<Routes>
+					<Route path="/" element={<Login />} />
+					<Route path="/register" element={<Register />} />
+				</Routes>
+			</Router>
 		</main>
 	)
 };

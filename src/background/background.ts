@@ -17,13 +17,11 @@ chrome.runtime.onMessage.addListener((message: RequestMessageType, sender, sendR
         } as ResponseMessageType)
       })
     break;
-    case 'SEND_POPUP_DATA_REQUEST':
-      handlePopupData().then( (serverRes) => {
-        sendResponse({ 
-          type: 'SEND_POPUP_DATA_RESPONSE',
-          success: true, // maybe later on will set to httpResponse.ok
-        } as ResponseMessageType)
-      })
+    case 'SEND_LOGIN_DATA_REQUEST':
+      handleLogin()
+    break;
+    case 'SEND_REGISTRATION_DATA_REQUEST':
+      handleRegistration()
     break;
     default:
       console.log('invalid message type')
@@ -41,11 +39,15 @@ const handleTabData = async () => {
 
 }
 
-const handlePopupData = async () => {
-  // send to correct API endpoint on server
-  // return response from server
+
+
+const handleLogin = async () => {
+
 }
 
+const handleRegistration = async () => {
+
+}
 
 
 
