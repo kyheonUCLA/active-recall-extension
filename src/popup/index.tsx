@@ -6,12 +6,11 @@ import Popup from "./popup";
 
 function init() {
 	const appContainer = document.createElement('div')
-	document.body.appendChild(appContainer)
 	if (!appContainer) {
 		throw new Error("Can not find AppContainer");
 	}
+	document.body.appendChild(appContainer)
 	const root = createRoot(appContainer)
-	console.log(appContainer)
 	root.render(
 		<React.StrictMode>
 			<PopupContextProvider>
