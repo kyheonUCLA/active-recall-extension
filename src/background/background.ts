@@ -1,5 +1,7 @@
-import { getCompletion } from "../assets/api";
+
+import { saveInput } from "../assets/api";
 import type { ResponseMessageType, RequestMessageType } from "../assets/types";
+
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log("I just got installed");
@@ -37,7 +39,7 @@ const handleTabData = async () => {
   // send to correct API endpoint on server
   // return response from server
 
-  return await getCompletion('name an animal')
+  return await saveInput('name an animal')
 
 }
 

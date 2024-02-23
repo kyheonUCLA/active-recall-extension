@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
-import { BsSun, BsMoon } from "react-icons/bs"
-import { getCompletion } from "../../assets/api";
+import { BsSun, BsMoon } from "react-icons/bs";
+import { saveInput } from "../../assets/api";
 import { useActiveTabContext } from "../../context/ActiveTabContextProvider";
 import type { RequestMessageType, ResponseMessageType } from "../../assets/types";
 
@@ -20,7 +20,6 @@ const Widget: FC = () => {
 			}
     });
   };
-   
 
   return (
     <button
@@ -30,7 +29,7 @@ const Widget: FC = () => {
       active:scale-105 transition-all dark:bg-gray-950" onClick={handleClick}>
       <BsMoon />
     </button>
-  )
-}
+  );
+};
 
 export default Widget;
