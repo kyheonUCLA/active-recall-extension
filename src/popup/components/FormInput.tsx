@@ -3,7 +3,7 @@ import React from "react"
 type FormInputProps = {
   children: string,
   name: string,
-  type: 'email' | 'password' | 'text',
+  type: 'email' | 'password' | 'text' | 'tel',
   placeholder: string,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void, 
 }
