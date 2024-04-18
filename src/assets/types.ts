@@ -1,12 +1,18 @@
 
 const responseMessageTypes = [
   "SEND_TAB_DATA_RESPONSE",
+  "SEND_LOGIN_DATA_RESPONSE",
+  "SEND_REGISTRATION_DATA_RESPONSE",
   "SEND_POPUP_DATA_RESPONSE",
+  "CREATE_QUIZ_RESPONSE",
 ] as const
 
 const requestMessageTypes = [
   "SEND_TAB_DATA_REQUEST",
+  "SEND_LOGIN_DATA_REQUEST",
+  "SEND_REGISTRATION_DATA_REQUEST",
   "SEND_POPUP_DATA_REQUEST",
+  "CREATE_QUIZ_REQUEST",
 ] as const
 
 type RequestMessageType = {
